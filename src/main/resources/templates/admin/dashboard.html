@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head th:replace="~{fragments/head :: head('Admin Dashboard')}"></head>
+  <body>
+    <div th:replace="~{fragments/header :: header}"></div>
+
+    <main class="container py-4">
+      <div class="d-grid gap-3">
+        <div class="card p-3">
+          <div class="d-flex justify-content-between">
+            <div>
+              <h2>Manage Users</h2>
+              <p>View and manage registered users.</p>
+              <a th:href="@{/admin/users}" class="btn btn-primary"
+                >View Users</a
+              >
+            </div>
+            <div class="align-self-start">
+              <a
+                class="btn btn-sm btn-outline-secondary"
+                th:href="@{/forgot-password(role='admin')}"
+                >Change Password</a
+              >
+            </div>
+          </div>
+        </div>
+
+        <div class="card p-3">
+          <h2>Manage Garbage Collectors</h2>
+          <p>View, add, or remove garbage collectors.</p>
+          <a th:href="@{/admin/collectors}" class="btn btn-primary"
+            >View Collectors</a
+          >
+        </div>
+
+        <div class="card p-3">
+          <h2>Manage BBMP Officials</h2>
+          <p>View details of BBMP officials.</p>
+          <a th:href="@{/admin/bbmp}" class="btn btn-primary"
+            >View BBMP Officials</a
+          >
+        </div>
+
+        <div class="card p-3">
+          <h2>All Bookings</h2>
+          <p>View all slot bookings with details.</p>
+          <a th:href="@{/admin/bookings}" class="btn btn-primary"
+            >View Bookings</a
+          >
+        </div>
+
+        <div class="card p-3">
+          <h2>Payments</h2>
+          <p>View and track all payments.</p>
+          <a th:href="@{/admin/payments}" class="btn btn-primary"
+            >View Payments</a
+          >
+        </div>
+      </div>
+    </main>
+
+    <div th:replace="~{fragments/footer :: footer}"></div>
+  </body>
+</html>

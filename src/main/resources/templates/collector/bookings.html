@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/head :: head('Collector Bookings | Book-A-Bin')}"></head>
+<body>
+    <div th:replace="~{fragments/header :: header}"></div>
+
+    <main class="container py-4">
+        <h1 class="mb-2">My Assigned Bookings</h1>
+        <p class="text-muted mb-3">Manage today’s pickups and confirm waste segregation.</p>
+
+        <div class="table-responsive">
+            <table class="table table-striped align-middle">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>User</th>
+            <th>Location</th>
+            <th>Date</th>
+            <th>Status</th>
+            <th>Segregation</th>
+            <th>Action</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="booking : ${bookings}">
+            <td th:text="${booking.id}"></td>
+            <td th:text="${booking.user.username}"></td>
+            <td th:text="${booking.location}"></td>
+            <td th:text="${#temporals.format(booking.bookingDate, 'dd-MM-yyyy HH:mm')}"></td>
+            <td th:text="${booking.status}"></td>
+            <td>
+                <form th:action="@{'/collector/confirm-booking/' + ${booking.id}}" method="post">
+                    <label>
+                        <input type="radio" name="segregated" value="true" required>
+                        Segregated
+                    </label>
+                    <label>
+                        <input type="radio" name="segregated" value="false" required>
+                        Not Segregated
+                    </label>
+            </td>
+            <td>
+                    <button type="submit" class="btn">Confirm</button>
+                </form>
+            </td>
+        </tr>
+        </tbody>
+            </table>
+        </div>
+    </main>
+
+    <div th:replace="~{fragments/footer :: footer}"></div>
+
+</body>
+</html>

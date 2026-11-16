@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head th:replace="~{fragments/head :: head('Collector Dashboard')}"></head>
+  <body>
+    <div th:replace="~{fragments/header :: header}"></div>
+
+    <main class="container py-4">
+      <div class="d-flex justify-content-between align-items-center mb-3">
+        <h1 class="m-0">Welcome, <span th:text="${collector.name}"></span></h1>
+        <div>
+          <a
+            class="btn btn-sm btn-outline-secondary me-2"
+            th:href="@{/forgot-password(role='collector')}"
+            >Change Password</a
+          >
+          <a th:href="@{/logout}" class="btn btn-outline-secondary">Logout</a>
+        </div>
+      </div>
+
+      <section class="mb-4">
+        <h2>Pending Bookings in Your Area</h2>
+        <div class="table-responsive">
+          <table class="table table-hover">
+            <thead>
+              <tr>
+                <th>Booking ID</th>
+                <th>User</th>
+                <th>Location</th>
+                <th>Status</th>
+                <th>Booking Date</th>
+                <th>Amount</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr th:each="booking : ${pendingBookings}">
+                <td th:text="${booking.id}"></td>
+                <td th:text="${booking.user.username}"></td>
+                <td th:text="${booking.location}"></td>
+                <td th:text="${booking.status}"></td>
+                <td
+                  th:text="${#temporals.format(booking.preferredDateTime, 'dd-MM-yyyy HH:mm')}"
+                ></td>
+                <td th:text="${booking.amount}"></td>
+                <td>
+                  <form
+                    th:action="@{'/collector/confirm/' + ${booking.id}}"
+                    method="post"
+                  >
+                    <button type="submit" class="btn btn-sm btn-primary">
+                      Confirm
+                    </button>
+                  </form>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="mb-4">
+        <h2>Your Schedules</h2>
+        <div th:if="${#lists.isEmpty(schedules)}">
+          <p class="text-muted">No schedules published for your area.</p>
+        </div>
+        <div th:if="${!#lists.isEmpty(schedules)}" class="table-responsive">
+          <table class="table table-sm">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Area</th>
+                <th>Date</th>
+                <th>Time</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr th:each="s : ${schedules}">
+                <td th:text="${s.id}"></td>
+                <td th:text="${s.area}"></td>
+                <td th:text="${#temporals.format(s.date, 'dd-MM-yyyy')}"></td>
+                <td th:text="${s.time}"></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section>
+        <h2>Your Confirmed Bookings</h2>
+        <div class="table-responsive">
+          <table class="table table-sm">
+            <thead>
+              <tr>
+                <th>Booking ID</th>
+                <th>User</th>
+                <th>Address</th>
+                <th>Booking Date</th>
+                <th>View Details</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr th:each="booking : ${confirmedBookings}">
+                <td th:text="${booking.id}"></td>
+                <td
+                  th:text="${booking.user != null ? booking.user.username : 'N/A'}"
+                ></td>
+                <td th:text="${booking.location}"></td>
+                <td
+                  th:text="${#temporals.format(booking.preferredDateTime, 'dd-MM-yyyy HH:mm')}"
+                ></td>
+                <td>
+                  <a
+                    th:href="@{'/collector/booking-details/' + ${booking.id}}"
+                    class="btn"
+                    >View</a
+                  >
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </main>
+
+    <div th:replace="~{fragments/footer :: footer}"></div>
+  </body>
+</html>

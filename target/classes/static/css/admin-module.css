@@ -1,0 +1,6 @@
+@import url('/css/global.css');
+
+/* Admin module-specific tweaks */
+.admin-dashboard .dashboard-card { min-height:120px; display:flex; flex-direction:column; justify-content:space-between; }
+.admin-actions { display:flex; gap:10px; flex-wrap:wrap; }
+.admin-actions .btn { min-width:120px; }

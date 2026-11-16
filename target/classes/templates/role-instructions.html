@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head
+    th:replace="~{fragments/head :: head('Instructions | Book-A-Bin')}"
+  ></head>
+  <body>
+    <div th:replace="~{fragments/header :: header}"></div>
+    <main class="container py-5">
+      <div class="row justify-content-center">
+        <div class="col-12 col-md-10 col-lg-8">
+          <div class="card shadow-sm p-4">
+            <h1 class="mb-3">Instructions</h1>
+            <p class="text-muted">
+              Please read the instructions carefully before using the
+              application.
+            </p>
+
+            <div th:if="${role == null || role == ''}">
+              <p class="lead">
+                Choose your role from the menu to view tailored instructions, or
+                use the buttons below.
+              </p>
+              <div class="d-flex gap-2 flex-wrap">
+                <a
+                  class="btn btn-outline-primary"
+                  th:href="@{/instructions/user}"
+                  >User</a
+                >
+                <a
+                  class="btn btn-outline-primary"
+                  th:href="@{/instructions/collector}"
+                  >Collector</a
+                >
+                <a
+                  class="btn btn-outline-primary"
+                  th:href="@{/instructions/bbmp}"
+                  >BBMP</a
+                >
+                <a
+                  class="btn btn-outline-primary"
+                  th:href="@{/instructions/admin}"
+                  >Admin</a
+                >
+              </div>
+            </div>
+
+            <div th:if="${role == 'user'}" class="mt-4">
+              <h3>User Instructions</h3>
+              <ul>
+                <li>
+                  Use this app to book garbage collection slots at your
+                  convenience.
+                </li>
+                <li>
+                  Segregate your waste into <strong>Wet</strong>,
+                  <strong>Dry</strong> and
+                  <strong>Hazardous</strong> categories.
+                </li>
+                <li>
+                  If waste is not segregated properly, fines may be imposed by
+                  the collector.
+                </li>
+                <li>View past bookings and receipts from your dashboard.</li>
+              </ul>
+              <a class="btn btn-primary" href="/login?role=user"
+                >Continue to Login</a
+              >
+            </div>
+
+            <div th:if="${role == 'collector'}" class="mt-4">
+              <h3>Collector Instructions</h3>
+              <ul>
+                <li>
+                  Login to view pending and confirmed bookings assigned to your
+                  area.
+                </li>
+                <li>
+                  When you visit a user, confirm whether waste is segregated.
+                </li>
+                <li>
+                  If segregated, mark the booking <strong>Completed</strong>;
+                  otherwise impose a fine.
+                </li>
+                <li>
+                  After the user pays the fine, mark fine collection as
+                  confirmed in the app.
+                </li>
+              </ul>
+              <a class="btn btn-primary" href="/login?role=collector"
+                >Continue to Login</a
+              >
+            </div>
+
+            <div th:if="${role == 'bbmp'}" class="mt-4">
+              <h3>BBMP Official Instructions</h3>
+              <ul>
+                <li>
+                  Monitor collection activity and compliance across areas.
+                </li>
+                <li>Set and update collection fees and fines.</li>
+                <li>Publish schedules for collectors.</li>
+              </ul>
+              <a class="btn btn-primary" href="/login?role=bbmp"
+                >Continue to Login</a
+              >
+            </div>
+
+            <div th:if="${role == 'admin'}" class="mt-4">
+              <h3>Admin Instructions</h3>
+              <ul>
+                <li>
+                  Manage users and collectors and oversee bookings and payments.
+                </li>
+                <li>
+                  Use dedicated pages for edits to avoid accidental password
+                  exposure.
+                </li>
+              </ul>
+              <a class="btn btn-primary" href="/login?role=admin"
+                >Continue to Login</a
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+    <div th:replace="~{fragments/footer :: footer}"></div>
+  </body>
+</html>

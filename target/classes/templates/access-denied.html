@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head
+    th:replace="~{fragments/head :: head('Access Denied | Book-A-Bin')}"
+  ></head>
+  <body>
+    <div th:replace="~{fragments/header :: header}"></div>
+    <main class="container py-5 text-center">
+      <h1 class="display-5">Access Denied</h1>
+      <p class="lead">You do not have permission to access this page.</p>
+      <a th:href="@{/}" class="btn btn-primary">Return to Home</a>
+    </main>
+    <div th:replace="~{fragments/footer :: footer}"></div>
+  </body>
+</html>

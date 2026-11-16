@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head th:replace="~{fragments/head :: head('Booking Details')}"></head>
+  <body>
+    <div th:replace="~{fragments/header :: header}"></div>
+
+    <main class="container py-4">
+      <div class="d-flex justify-content-between align-items-center mb-3">
+        <h1 class="m-0">Booking Details</h1>
+        <a th:href="@{/collector/bookings}" class="btn btn-link"
+          >← Back to Bookings</a
+        >
+      </div>
+
+      <div class="row g-3">
+        <div class="col-md-6">
+          <div class="card p-3 mb-3">
+            <h5>Booking Info</h5>
+            <p>
+              <strong>Booking ID:</strong> <span th:text="${booking.id}"></span>
+            </p>
+            <p>
+              <strong>Status:</strong> <span th:text="${booking.status}"></span>
+            </p>
+            <p>
+              <strong>Location:</strong>
+              <span th:text="${booking.location}"></span>
+            </p>
+            <p>
+              <strong>Amount:</strong>
+              <span
+          
+          <div class="card p-3 mt-3">
+            <h5>Assigned Collector</h5>
+            <p>
+              <strong>Name:</strong>
+              <span th:text="${booking.collector != null ? booking.collector.name : 'Not assigned'}"></span>
+            </p>
+            <p>
+              <strong>Location:</strong>
+              <span th:text="${booking.collector != null ? booking.collector.location : '-'}"></span>
+            </p>
+            <p>
+              <strong>Phone:</strong>
+              <a th:if="${booking.collector != null}"
+                 th:href="'tel:' + ${booking.collector.phoneNumber}"
+                 th:text="${booking.collector.phoneNumber}"></a>
+              <span th:if="${booking.collector == null}">-</span>
+            </p>
+            <p>
+              <strong>Contact Email:</strong>
+              <span th:text="${booking.collector != null ? booking.collector.email : '-'}"></span>
+            </p>
+            <div th:if="${booking.collector != null}">
+              <a th:href="@{'/collector/public/' + ${booking.collector.id}}" class="btn btn-sm btn-outline-primary">View Public Profile</a>
+            </div>
+          </div>
+                th:text="${booking.amount != null ? booking.amount : 0}"
+              ></span>
+            </p>
+            <p>
+              <strong>Fine:</strong>
+              <span
+                th:text="${booking.fine != null && booking.fine > 0 ? booking.fine : 'No Fine'}"
+              ></span>
+            </p>
+            <p>
+              <strong>Date:</strong>
+              <span
+                th:text="${#temporals.format(booking.preferredDateTime, 'dd-MM-yyyy HH:mm')}"
+              ></span>
+            </p>
+          </div>
+        </div>
+
+        <div class="col-md-6">
+          <div class="card p-3 mb-3">
+            <h5>User Contact Details</h5>
+            <p>
+              <strong>Name:</strong>
+              <span
+                th:text="${user != null ? (user.name != null ? user.name : user.username) : 'N/A'}"
+              ></span>
+            </p>
+            <p>
+              <strong>Email:</strong>
+              <span th:text="${user != null ? user.email : 'N/A'}"></span>
+            </p>
+            <p>
+              <strong>Phone:</strong>
+              <a
+                th:href="'tel:' + ${user != null ? user.phone : ''}"
+                th:text="${user != null ? user.phone : 'N/A'}"
+              ></a>
+            </p>
+          </div>
+
+          <div class="card p-3">
+            <h5>Your Contact Details</h5>
+            <p>
+              <strong>Name:</strong>
+              <span th:text="${collector.name}"></span>
+            </p>
+            <p>
+              <strong>Email:</strong> <span th:text="${collector.email}"></span>
+            </p>
+            <p>
+              <strong>Phone:</strong>
+              <a
+                th:href="'tel:' + ${collector.phoneNumber}"
+                th:text="${collector.phoneNumber}"
+              ></a>
+            </p>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <div th:replace="~{fragments/footer :: footer}"></div>
+  </body>
+</html>

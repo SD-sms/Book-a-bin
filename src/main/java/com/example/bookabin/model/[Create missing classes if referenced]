@@ -1,0 +1,53 @@
+class GarbageCollector {
+    // Define properties and methods as needed
+}
+
+class Booking {
+    private GarbageCollector garbageCollector;
+
+    // Other properties and methods
+}
+
+class User {
+    private String username;
+    private String email;
+    private String phone;
+    private String address;
+
+    // Getters and Setters
+}
+
+class Payment {
+    private User user;
+    private String purpose;
+
+    // Getters and Setters
+}
+
+class FixedFee {
+    // Define properties and methods as needed
+}
+
+class Collector {
+    // Define properties and methods as needed
+}
+
+class BookingService {
+    // Define properties and methods as needed
+}
+
+class Authentication {
+    // Define properties and methods as needed
+}
+
+class CollectorRepository {
+    // Define properties and methods as needed
+}
+
+class UserRepository {
+    // Define properties and methods as needed
+}
+
+class PaymentRepository {
+    // Define properties and methods as needed
+}

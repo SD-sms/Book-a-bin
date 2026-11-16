@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<div xmlns:th="http://www.thymeleaf.org" th:fragment="header">
+  <header class="site-header bg-white shadow-sm">
+    <div
+      class="container d-flex align-items-center justify-content-between py-2"
+    >
+      <div class="d-flex align-items-center gap-3">
+        <a class="site-brand d-flex align-items-center" th:href="@{/}">
+          <img
+            src="/images/logo-small.png"
+            alt="logo"
+            style="height: 32px; margin-right: 8px"
+            onerror="this.style.display='none'"
+          />
+          <span class="navbar-brand mb-0">Book-A-Bin</span>
+        </a>
+        <nav class="d-none d-md-block">
+          <ul class="nav">
+            <li class="nav-item">
+              <a class="nav-link" th:href="@{/}">Home</a>
+            </li>
+            <li class="nav-item dropdown">
+              <a
+                class="nav-link dropdown-toggle"
+                href="#"
+                id="instructionsDropdown"
+                role="button"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+                >Instructions</a
+              >
+              <ul class="dropdown-menu" aria-labelledby="instructionsDropdown">
+                <li>
+                  <a class="dropdown-item" th:href="@{/instructions/user}"
+                    >User</a
+                  >
+                </li>
+                <li>
+                  <a class="dropdown-item" th:href="@{/instructions/collector}"
+                    >Collector</a
+                  >
+                </li>
+                <li>
+                  <a class="dropdown-item" th:href="@{/instructions/bbmp}"
+                    >BBMP</a
+                  >
+                </li>
+                <li>
+                  <a class="dropdown-item" th:href="@{/instructions/admin}"
+                    >Admin</a
+                  >
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </nav>
+      </div>
+
+      <div class="nav-actions">
+        <!-- Make Login more visible like Register -->
+        <a
+          class="btn btn-sm btn-outline-primary d-none d-md-inline"
+          th:href="@{/login}"
+          >Login</a
+        >
+        <a class="btn btn-sm btn-primary ms-2" th:href="@{/register}"
+          >Register</a
+        >
+        <!-- Mobile menu toggle -->
+        <button
+          class="btn btn-link d-md-none"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#mobile-nav"
+          aria-controls="mobile-nav"
+          aria-expanded="false"
+        >
+          ☰
+        </button>
+      </div>
+    </div>
+
+    <div class="collapse bg-white" id="mobile-nav">
+      <div class="container py-2">
+        <ul class="list-unstyled mb-0">
+          <li><a class="d-block py-1" th:href="@{/}">Home</a></li>
+          <li><a class="d-block py-1" th:href="@{/}">Home</a></li>
+          <li class="py-1">Instructions</li>
+          <li>
+            <ul class="list-unstyled ps-3 mb-0">
+              <li>
+                <a class="d-block py-1" th:href="@{/instructions/user}">User</a>
+              </li>
+              <li>
+                <a class="d-block py-1" th:href="@{/instructions/collector}"
+                  >Collector</a
+                >
+              </li>
+              <li>
+                <a class="d-block py-1" th:href="@{/instructions/bbmp}">BBMP</a>
+              </li>
+              <li>
+                <a class="d-block py-1" th:href="@{/instructions/admin}"
+                  >Admin</a
+                >
+              </li>
+            </ul>
+          </li>
+          <li><a class="d-block py-1" th:href="@{/login}">Login</a></li>
+          <li><a class="d-block py-1" th:href="@{/register}">Register</a></li>
+        </ul>
+      </div>
+    </div>
+  </header>
+</div>

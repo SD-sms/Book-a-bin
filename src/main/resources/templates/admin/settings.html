@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head th:replace="~{fragments/head :: head('BBMP Settings')}"></head>
+  <body>
+    <div th:replace="~{fragments/header :: header}"></div>
+
+    <main class="container py-4">
+      <div class="d-flex justify-content-between align-items-center mb-3">
+        <h1 class="m-0">BBMP Settings</h1>
+        <a th:href="@{/admin/dashboard}" class="btn btn-link"
+          >← Back to Dashboard</a
+        >
+      </div>
+
+      <div class="card p-3 mx-auto max-w-720">
+        <form
+          th:action="@{/admin/settings}"
+          method="post"
+          th:object="${settings}"
+        >
+          <div class="mb-3">
+            <label class="form-label">Collection Fee (₹)</label>
+            <input
+              type="number"
+              step="0.01"
+              th:field="*{collectionFee}"
+              class="form-control"
+            />
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label">Fine per Violation (₹)</label>
+            <input
+              type="number"
+              step="0.01"
+              th:field="*{finePerViolation}"
+              class="form-control"
+            />
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label">Booking Window Days</label>
+            <input
+              type="number"
+              th:field="*{bookingWindowDays}"
+              class="form-control"
+            />
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label">Zone Name</label>
+            <input
+              type="text"
+              th:field="*{bbmpZoneName}"
+              class="form-control"
+            />
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label">Contact Email</label>
+            <input
+              type="email"
+              th:field="*{bbmpContactEmail}"
+              class="form-control"
+            />
+          </div>
+
+          <button type="submit" class="btn btn-primary">Save</button>
+        </form>
+      </div>
+    </main>
+
+    <div th:replace="~{fragments/footer :: footer}"></div>
+  </body>
+</html>

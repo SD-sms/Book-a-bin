@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/head :: head('User Dashboard | Book-A-Bin')}"></head>
+<body>
+
+    <div th:replace="~{fragments/header :: header}"></div>
+
+    <main class="container py-4">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+            <h1 class="m-0">Welcome, <span th:text="${#authentication != null ? #authentication.name : 'User'}">User</span>!</h1>
+            <a class="btn btn-sm btn-outline-secondary" th:href="@{/forgot-password(role='user')}">Change Password</a>
+        </div>
+        <p class="text-muted">Manage your bookings, payments, and profile.</p>
+
+        <section class="row row-cols-1 row-cols-md-3 g-3 mb-4">
+            <div class="col">
+                <div class="card h-100 p-3">
+                    <h5>Past Bookings</h5>
+                    <p class="mb-2">See your booking history, segregation status, and fines if any.</p>
+                    <a class="btn btn-sm btn-primary" th:href="@{/user/bookings}">View Bookings</a>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card h-100 p-3">
+                    <h5>Book a Bin</h5>
+                    <p class="mb-2">Schedule a new garbage collection at your location.</p>
+                    <a class="btn btn-sm btn-primary" th:href="@{/user/book-bin}">New Booking</a>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card h-100 p-3">
+                    <h5>Payment Receipts</h5>
+                    <p class="mb-2">View and download past payment receipts.</p>
+                    <a class="btn btn-sm btn-primary" th:href="@{/user/payments}">View Payments</a>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card h-100 p-3">
+                    <h5>Make a Payment</h5>
+                    <p class="mb-2">Pay BBMP fees or fines for garbage collection services.</p>
+                    <a class="btn btn-sm btn-primary" th:href="@{/user/make-payment}">Make Payment</a>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card h-100 p-3">
+                    <h5>Edit Profile</h5>
+                    <p class="mb-2">Update your profile, password, and address anytime.</p>
+                        <a class="btn btn-sm btn-primary" th:href="@{/user/edit-profile}">View / Edit Profile</a>
+                        <a class="btn btn-sm btn-outline-primary ms-2" th:href="@{/user/schedules}">View Regular Schedule</a>
+                        <a class="btn btn-sm btn-outline-secondary ms-2" th:href="@{/forgot-password(role='user')}">Change Password</a>
+                </div>
+            </div>
+        </section>
+
+        <section class="history">
+            <h2>Your Booking History</h2>
+            <div class="table-responsive">
+                <table class="table table-sm table-hover">
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>Date</th>
+                <th>Location</th>
+                <th>Status</th>
+                <th>Segregated</th>
+                <th>Amount</th>
+                <th>Fine</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="booking : ${bookings}">
+                <td th:text="${booking.id}"></td>
+                <td th:text="${#temporals.format(booking.preferredDateTime, 'dd-MM-yyyy HH:mm')}"></td>
+                <td th:text="${booking.location}"></td>
+                <td th:text="${booking.status}"></td>
+                <td th:text="${booking.segregated ? 'Yes' : 'No'}"></td>
+                <td th:text="${booking.amount}"></td>
+                <td th:text="${booking.fine > 0 ? booking.fine : 'No Fine'}"></td>
+            </tr>
+            </tbody>
+        </table>
+    </section>
+</main>
+
+<!-- Footer -->
+<div th:replace="~{fragments/footer :: footer}"></div>
+
+</body>
+</html>

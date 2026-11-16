@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head th:replace="~{fragments/head :: head('Register | Book-A-Bin')}"></head>
+  <body>
+    <!-- No navbar on register page -->
+    <main class="container py-5">
+      <div class="card-panel max-md">
+        <h1>Register | Book-A-Bin</h1>
+        <p>Please select your role and fill in the details to register.</p>
+
+        <form id="registerForm" class="register-form" autocomplete="off">
+          <label for="role">Register As:</label>
+          <select id="role" name="role" required>
+            <option value="">-- Select Role --</option>
+            <option value="user">User</option>
+            <option value="collector">Garbage Collector</option>
+            <option value="bbmp">BBMP Official</option>
+          </select>
+
+          <div id="commonFields">
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" />
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" />
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" />
+          </div>
+
+          <div id="userExtra" class="hidden">
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username" />
+            <label for="familyCount">Number in family:</label>
+            <input type="number" id="familyCount" name="familyCount" min="1" />
+            <label for="address">Address:</label>
+            <textarea id="address" name="address"></textarea>
+          </div>
+
+          <div id="collectorExtra" class="hidden">
+            <label for="collectorUsername">Username:</label>
+            <input
+              type="text"
+              id="collectorUsername"
+              name="collectorUsername"
+            />
+            <label for="phone">Phone:</label>
+            <input type="text" id="phone" name="phone" />
+          </div>
+
+          <div id="bbmpExtra" class="hidden">
+            <label for="bbmpId">BBMP ID:</label>
+            <input type="text" id="bbmpId" name="bbmpId" />
+          </div>
+
+          <button type="submit" class="btn">Register</button>
+        </form>
+
+        <p class="note mt-3">
+          Already have an account? <a href="/login">Login here</a>
+        </p>
+      </div>
+    </main>
+    <div th:replace="~{fragments/footer :: footer}"></div>
+
+    <script>
+      const roleEl = document.getElementById('role');
+      roleEl.addEventListener('change', () => {
+        const r = roleEl.value;
+        const userEl = document.getElementById('userExtra');
+        const colEl = document.getElementById('collectorExtra');
+        const bbmpEl = document.getElementById('bbmpExtra');
+        if (userEl) userEl.classList.toggle('hidden', r !== 'user');
+        if (colEl) colEl.classList.toggle('hidden', r !== 'collector');
+        if (bbmpEl) bbmpEl.classList.toggle('hidden', r !== 'bbmp');
+      });
+
+      document
+        .getElementById('registerForm')
+        .addEventListener('submit', async (e) => {
+          e.preventDefault();
+          const role = document.getElementById('role').value;
+          const base = {
+            role: role,
+            name: document.getElementById('name').value,
+            email: document.getElementById('email').value,
+            password: document.getElementById('password').value,
+          };
+
+          if (role === 'user') {
+            base.username = document.getElementById('username').value;
+            base.familyCount = parseInt(
+              document.getElementById('familyCount').value || '0'
+            );
+            base.address = document.getElementById('address').value;
+          } else if (role === 'collector') {
+            base.username = document.getElementById('collectorUsername').value;
+            base.phone = document.getElementById('phone').value;
+          } else if (role === 'bbmp') {
+            base.id = document.getElementById('bbmpId').value;
+          }
+
+          const res = await fetch('/api/register', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(base),
+          });
+
+          if (res.ok) {
+            alert('Registered successfully');
+            window.location.href = '/login';
+          } else {
+            const body = await res.json().catch(() => ({}));
+            alert('Registration failed: ' + (body.error || res.status));
+          }
+        });
+    </script>
+  </body>
+</html>

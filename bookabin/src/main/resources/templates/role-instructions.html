@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head
+    th:replace="~{fragments/head :: head('Instructions | Book-A-Bin')}"
+  ></head>
+  <body>
+    <div th:replace="~{fragments/header :: header}"></div>
+    <main class="container py-5">
+      <h1>Instructions</h1>
+      <p>
+        Please read the instructions carefully before using the application.
+      </p>
+
+      <!-- USER Instructions -->
+      <section
+        class="role-card hidden"
+        id="user-instructions"
+        th:if="${role == 'user'}"
+      >
+        <h2>User Instructions</h2>
+        <ul>
+          <li>
+            Use this app to book garbage collection slots at your convenience.
+          </li>
+          <li>
+            Segregate your waste properly into <b>Wet Waste</b>,
+            <b>Dry Waste</b>, and <b>Hazardous Waste</b>.
+          </li>
+          <li>
+            If waste is not segregated properly, a fine will be imposed by the
+            Garbage Collector and reflected in your payments.
+          </li>
+          <li>Check your past bookings and receipts in the Dashboard.</li>
+          <li>
+            Ensure your family members use the same login credentials for
+            convenience.
+          </li>
+        </ul>
+        <a class="btn" href="/login?role=user">Continue to Login</a>
+      </section>
+
+      <!-- COLLECTOR Instructions -->
+      <section
+        class="role-card hidden"
+        id="collector-instructions"
+        th:if="${role == 'collector'}"
+      >
+        <h2>Garbage Collector Instructions</h2>
+        <ul>
+          <li>
+            Login to view all pending and confirmed bookings in your assigned
+            location.
+          </li>
+          <li>
+            Upon visiting the user, confirm whether the waste is
+            <b>segregated</b> or <b>not segregated</b>.
+          </li>
+          <li>If segregated → mark the booking as <b>Completed</b>.</li>
+          <li>
+            If not segregated → impose a fine through the app, which will be
+            added to the user's account.
+          </li>
+          <li>Confirm fine collection via the app once the user pays.</li>
+        </ul>
+        <a class="btn" href="/login?role=collector">Continue to Login</a>
+      </section>
+
+      <!-- BBMP Instructions -->
+      <section
+        class="role-card hidden"
+        id="bbmp-instructions"
+        th:if="${role == 'bbmp'}"
+      >
+        <h2>BBMP Official Instructions</h2>
+        <ul>
+          <li>
+            Login to monitor overall garbage collection activities and
+            compliance.
+          </li>
+          <li>
+            Set and update fee structures for garbage collection services.
+          </li>
+          <li>Track fine collections and monitor non-segregation reports.</li>
+        </ul>
+        <a class="btn" href="/login?role=bbmp">Continue to Login</a>
+      </section>
+
+      <!-- Admin Instructions -->
+      <section
+        class="role-card hidden"
+        id="admin-instructions"
+        th:if="${role == 'admin'}"
+      >
+        <h2>Admin Instructions</h2>
+        <ul>
+          <li>
+            Manage users, garbage collectors, and BBMP officials in the system.
+          </li>
+          <li>Oversee all bookings and payment records.</li>
+          <li>Ensure smooth functioning of the Book-A-Bin application.</li>
+        </ul>
+        <a class="btn" href="/login?role=admin">Continue to Login</a>
+      </section>
+    </main>
+    <div th:replace="~{fragments/footer :: footer}"></div>
+    <script>
+      window.onload = () => {
+        const params = new URLSearchParams(window.location.search);
+        let role = params.get('role');
+        if (!role) {
+          const pathParts = window.location.pathname.split('/').filter(Boolean);
+          if (pathParts.length >= 2 && pathParts[0] === 'instructions') {
+            role = pathParts[1];
+          }
+        }
+        document.querySelectorAll('section.role-card').forEach((s) => {
+          if (!s.classList.contains('hidden')) s.classList.add('hidden');
+        });
+        if (role) {
+          const section = document.getElementById(role + '-instructions');
+          if (section) section.classList.remove('hidden');
+        }
+      };
+    </script>
+  </body>
+</html>

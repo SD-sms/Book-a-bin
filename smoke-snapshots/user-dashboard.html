@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>User Dashboard | Book-A-Bin</title>
+  <!-- Bootstrap 5 CSS -->
+  <link
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+    rel="stylesheet"
+    integrity="sha384-9ndCyUa6mY2k6Y4f2b6j2q6Qb6Y5Y6q3Q5Y7g5q3Q5Y6g5Q3Y6g5Q3Y6g5Q3Y6g5"
+    crossorigin="anonymous"
+  />
+  <link rel="stylesheet" href="/css/style.css" />
+</head>
+<body>
+
+    <div>
+  <header class="site-header bg-white shadow-sm">
+    <div
+      class="container d-flex align-items-center justify-content-between py-2"
+    >
+      <div class="d-flex align-items-center gap-3">
+        <a class="site-brand d-flex align-items-center" href="/">
+          <img
+            src="/images/logo-small.png"
+            alt="logo"
+            style="height: 32px; margin-right: 8px"
+            onerror="this.style.display='none'"
+          />
+          <span class="navbar-brand mb-0">Book-A-Bin</span>
+        </a>
+        <nav class="d-none d-md-block">
+          <ul class="nav">
+            <li class="nav-item">
+              <a class="nav-link" href="/">Home</a>
+            </li>
+            <li class="nav-item dropdown">
+              <a
+                class="nav-link dropdown-toggle"
+                href="#"
+                id="instructionsDropdown"
+                role="button"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+                >Instructions</a
+              >
+              <ul class="dropdown-menu" aria-labelledby="instructionsDropdown">
+                <li>
+                  <a class="dropdown-item" href="/instructions/user"
+                    >User</a
+                  >
+                </li>
+                <li>
+                  <a class="dropdown-item" href="/instructions/collector"
+                    >Collector</a
+                  >
+                </li>
+                <li>
+                  <a class="dropdown-item" href="/instructions/bbmp"
+                    >BBMP</a
+                  >
+                </li>
+                <li>
+                  <a class="dropdown-item" href="/instructions/admin"
+                    >Admin</a
+                  >
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </nav>
+      </div>
+
+      <div class="nav-actions">
+        <!-- Make Login more visible like Register -->
+        <a
+          class="btn btn-sm btn-outline-primary d-none d-md-inline"
+          href="/login"
+          >Login</a
+        >
+        <a class="btn btn-sm btn-primary ms-2" href="/register"
+          >Register</a
+        >
+        <!-- Mobile menu toggle -->
+        <button
+          class="btn btn-link d-md-none"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#mobile-nav"
+          aria-controls="mobile-nav"
+          aria-expanded="false"
+        >
+          ☰
+        </button>
+      </div>
+    </div>
+
+    <div class="collapse bg-white" id="mobile-nav">
+      <div class="container py-2">
+        <ul class="list-unstyled mb-0">
+          <li><a class="d-block py-1" href="/">Home</a></li>
+          <li><a class="d-block py-1" href="/">Home</a></li>
+          <li class="py-1">Instructions</li>
+          <li>
+            <ul class="list-unstyled ps-3 mb-0">
+              <li>
+                <a class="d-block py-1" href="/instructions/user">User</a>
+              </li>
+              <li>
+                <a class="d-block py-1" href="/instructions/collector"
+                  >Collector</a
+                >
+              </li>
+              <li>
+                <a class="d-block py-1" href="/instructions/bbmp">BBMP</a>
+              </li>
+              <li>
+                <a class="d-block py-1" href="/instructions/admin"
+                  >Admin</a
+                >
+              </li>
+            </ul>
+          </li>
+          <li><a class="d-block py-1" href="/login">Login</a></li>
+          <li><a class="d-block py-1" href="/register">Register</a></li>
+        </ul>
+      </div>
+    </div>
+  </header>
+</div>
+
+    <main class="container py-4">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+            <h1 class="m-0">Welcome, <span>User</span>!</h1>
+            <a class="btn btn-sm btn-outline-secondary" href="/forgot-password?role=user">Change Password</a>
+        </div>
+        <p class="text-muted">Manage your bookings, payments, and profile.</p>
+
+        <section class="row row-cols-1 row-cols-md-3 g-3 mb-4">
+            <div class="col">
+                <div class="card h-100 p-3">
+                    <h5>Past Bookings</h5>
+                    <p class="mb-2">See your booking history, segregation status, and fines if any.</p>
+                    <a class="btn btn-sm btn-primary" href="/user/bookings">View Bookings</a>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card h-100 p-3">
+                    <h5>Book a Bin</h5>
+                    <p class="mb-2">Schedule a new garbage collection at your location.</p>
+                    <a class="btn btn-sm btn-primary" href="/user/book-bin">New Booking</a>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card h-100 p-3">
+                    <h5>Payment Receipts</h5>
+                    <p class="mb-2">View and download past payment receipts.</p>
+                    <a class="btn btn-sm btn-primary" href="/user/payments">View Payments</a>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card h-100 p-3">
+                    <h5>Make a Payment</h5>
+                    <p class="mb-2">Pay BBMP fees or fines for garbage collection services.</p>
+                    <a class="btn btn-sm btn-primary" href="/user/make-payment">Make Payment</a>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card h-100 p-3">
+                    <h5>Edit Profile</h5>
+                    <p class="mb-2">Update your profile, password, and address anytime.</p>
+                        <a class="btn btn-sm btn-primary" href="/user/edit-profile">View / Edit Profile</a>
+                        <a class="btn btn-sm btn-outline-primary ms-2" href="/user/schedules">View Regular Schedule</a>
+                        <a class="btn btn-sm btn-outline-secondary ms-2" href="/forgot-password?role=user">Change Password</a>
+                </div>
+            </div>
+        </section>
+
+        <section class="history">
+            <h2>Your Booking History</h2>
+            <div class="table-responsive">
+                <table class="table table-sm table-hover">
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>Date</th>
+                <th>Location</th>
+                <th>Status</th>
+                <th>Segregated</th>
+                <th>Amount</th>
+                <th>Fine</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>3</td>
+                <td>02-11-2025 17:49</td>
+                <td>Test Location</td>
+                <td>CONFIRMED</td>
+                <td>No</td>
+                <td>50.0</td>
+                <td>200.0</td>
+            </tr>
+            <tr>
+                <td>4</td>
+                <td>02-11-2025 17:51</td>
+                <td>Test Location</td>
+                <td>Confirmed</td>
+                <td>No</td>
+                <td>50.0</td>
+                <td>200.0</td>
+            </tr>
+            <tr>
+                <td>5</td>
+                <td>02-11-2025 18:04</td>
+                <td>Test Location</td>
+                <td>Confirmed</td>
+                <td>No</td>
+                <td>50.0</td>
+                <td>200.0</td>
+            </tr>
+            <tr>
+                <td>6</td>
+                <td>02-11-2025 18:51</td>
+                <td>Test Location</td>
+                <td>Confirmed</td>
+                <td>No</td>
+                <td>50.0</td>
+                <td>200.0</td>
+            </tr>
+            <tr>
+                <td>7</td>
+                <td>02-11-2025 18:52</td>
+                <td>Test Location</td>
+                <td>Confirmed</td>
+                <td>No</td>
+                <td>50.0</td>
+                <td>200.0</td>
+            </tr>
+            <tr>
+                <td>8</td>
+                <td>02-11-2025 18:52</td>
+                <td>Test Location</td>
+                <td>Confirmed</td>
+                <td>No</td>
+                <td>50.0</td>
+                <td>200.0</td>
+            </tr>
+            <tr>
+                <td>9</td>
+                <td>02-11-2025 18:54</td>
+                <td>Test Location</td>
+                <td>Confirmed</td>
+                <td>No</td>
+                <td>50.0</td>
+                <td>200.0</td>
+            </tr>
+            <tr>
+                <td>10</td>
+                <td>02-11-2025 20:12</td>
+                <td>Test Location</td>
+                <td>Confirmed</td>
+                <td>No</td>
+                <td>50.0</td>
+                <td>200.0</td>
+            </tr>
+            <tr>
+                <td>11</td>
+                <td>03-11-2025 11:58</td>
+                <td>Test Location</td>
+                <td>Confirmed</td>
+                <td>No</td>
+                <td>50.0</td>
+                <td>200.0</td>
+            </tr>
+            <tr>
+                <td>12</td>
+                <td>03-11-2025 12:30</td>
+                <td>Test Location</td>
+                <td>Confirmed</td>
+                <td>No</td>
+                <td>50.0</td>
+                <td>200.0</td>
+            </tr>
+            <tr>
+                <td>13</td>
+                <td>03-11-2025 12:30</td>
+                <td>Test Location</td>
+                <td>Confirmed</td>
+                <td>No</td>
+                <td>50.0</td>
+                <td>200.0</td>
+            </tr>
+            <tr>
+                <td>14</td>
+                <td>03-11-2025 12:32</td>
+                <td>Test Location</td>
+                <td>Confirmed</td>
+                <td>No</td>
+                <td>50.0</td>
+                <td>200.0</td>
+            </tr>
+            <tr>
+                <td>16</td>
+                <td>03-11-2025 13:49</td>
+                <td>Test Location</td>
+                <td>CONFIRMED</td>
+                <td>No</td>
+                <td>100.0</td>
+                <td>60.0</td>
+            </tr>
+            <tr>
+                <td>17</td>
+                <td>03-11-2025 13:52</td>
+                <td>Test Location</td>
+                <td>CONFIRMED</td>
+                <td>No</td>
+                <td>100.0</td>
+                <td>60.0</td>
+            </tr>
+            <tr>
+                <td>18</td>
+                <td>03-11-2025 14:02</td>
+                <td>Test Location</td>
+                <td>CONFIRMED</td>
+                <td>No</td>
+                <td>100.0</td>
+                <td>60.0</td>
+            </tr>
+            <tr>
+                <td>19</td>
+                <td>03-11-2025 14:25</td>
+                <td>Test Location</td>
+                <td>CONFIRMED</td>
+                <td>No</td>
+                <td>100.0</td>
+                <td>60.0</td>
+            </tr>
+            <tr>
+                <td>20</td>
+                <td>03-11-2025 14:33</td>
+                <td>Test Location</td>
+                <td>CONFIRMED</td>
+                <td>No</td>
+                <td>100.0</td>
+                <td>60.0</td>
+            </tr>
+            <tr>
+                <td>22</td>
+                <td>03-11-2025 20:05</td>
+                <td>Test Location</td>
+                <td>CONFIRMED</td>
+                <td>No</td>
+                <td>100.0</td>
+                <td>60.0</td>
+            </tr>
+            <tr>
+                <td>23</td>
+                <td>03-11-2025 20:40</td>
+                <td>Test Location</td>
+                <td>CONFIRMED</td>
+                <td>No</td>
+                <td>100.0</td>
+                <td>60.0</td>
+            </tr>
+            <tr>
+                <td>24</td>
+                <td>03-11-2025 20:55</td>
+                <td>Test Location</td>
+                <td>CONFIRMED</td>
+                <td>No</td>
+                <td>100.0</td>
+                <td>60.0</td>
+            </tr>
+            <tr>
+                <td>25</td>
+                <td>03-11-2025 20:55</td>
+                <td>Test Location</td>
+                <td>CONFIRMED</td>
+                <td>No</td>
+                <td>100.0</td>
+                <td>60.0</td>
+            </tr>
+            <tr>
+                <td>26</td>
+                <td>03-11-2025 20:56</td>
+                <td>Test Location</td>
+                <td>CONFIRMED</td>
+                <td>No</td>
+                <td>100.0</td>
+                <td>60.0</td>
+            </tr>
+            <tr>
+                <td>27</td>
+                <td>03-11-2025 21:08</td>
+                <td>Test Location</td>
+                <td>CONFIRMED</td>
+                <td>No</td>
+                <td>100.0</td>
+                <td>60.0</td>
+            </tr>
+            <tr>
+                <td>28</td>
+                <td>03-11-2025 21:24</td>
+                <td>Test Location</td>
+                <td>CONFIRMED</td>
+                <td>No</td>
+                <td>100.0</td>
+                <td>60.0</td>
+            </tr>
+            <tr>
+                <td>29</td>
+                <td>04-11-2025 15:22</td>
+                <td>Test Location</td>
+                <td>CONFIRMED</td>
+                <td>No</td>
+                <td>100.0</td>
+                <td>60.0</td>
+            </tr>
+            <tr>
+                <td>30</td>
+                <td>04-11-2025 15:44</td>
+                <td>Test Location</td>
+                <td>Confirmed</td>
+                <td>No</td>
+                <td>100.0</td>
+                <td>60.0</td>
+            </tr>
+            <tr>
+                <td>31</td>
+                <td>04-11-2025 23:03</td>
+                <td>Test Location</td>
+                <td>Confirmed</td>
+                <td>No</td>
+                <td>100.0</td>
+                <td>60.0</td>
+            </tr>
+            <tr>
+                <td>32</td>
+                <td>04-11-2025 23:07</td>
+                <td>Test Location</td>
+                <td>Confirmed</td>
+                <td>No</td>
+                <td>100.0</td>
+                <td>60.0</td>
+            </tr>
+            <tr>
+                <td>33</td>
+                <td>04-11-2025 23:12</td>
+                <td>Test Location</td>
+                <td>Confirmed</td>
+                <td>No</td>
+                <td>100.0</td>
+                <td>60.0</td>
+            </tr>
+            <tr>
+                <td>34</td>
+                <td>04-11-2025 23:12</td>
+                <td>Test Location</td>
+                <td>Confirmed</td>
+                <td>No</td>
+                <td>100.0</td>
+                <td>60.0</td>
+            </tr>
+            </tbody>
+        </table>
+    </section>
+</main>
+
+<!-- Footer -->
+<div>
+  <footer class="app-footer" role="contentinfo">
+    <div class="footer-inner">
+      <div class="footer-left">
+        <small>&copy; 2025 Book-A-Bin</small>
+      </div>
+      <div class="footer-right">
+        <small>
+          <a href="/privacy">Privacy Policy</a> |
+          <a href="/terms">Terms of Service</a>
+        </small>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Bootstrap Bundle JS (includes Popper) -->
+  <script
+    src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-ABC"
+    crossorigin="anonymous"
+  ></script>
+</div>
+
+</body>
+</html>

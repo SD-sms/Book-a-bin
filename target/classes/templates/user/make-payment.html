@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head
+    th:replace="~{fragments/head :: head('Make Payment | Book-A-Bin')}"
+  ></head>
+  <body>
+    <div th:replace="~{fragments/header :: header}"></div>
+
+    <main class="container py-4">
+      <h1 class="mb-3">Make Payment</h1>
+      <p class="text-muted">Select a booking and proceed with payment.</p>
+
+      <section>
+        <div class="table-responsive">
+          <table class="table table-sm table-bordered">
+            <thead>
+              <tr>
+                <th>Booking ID</th>
+                <th>Date</th>
+                <th>Amount</th>
+                <th>Fine</th>
+                <th>Total</th>
+                <th>Status</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr th:each="booking : ${bookings}">
+                <td th:text="${booking.id}"></td>
+                <td
+                  th:text="${#temporals.format(booking.preferredDateTime, 'dd-MM-yyyy HH:mm')}"
+                ></td>
+                <td th:text="${booking.amount}"></td>
+                <td th:text="${booking.fine != null ? booking.fine : 0}"></td>
+                <td
+                  th:text="${(booking.amount != null ? booking.amount : 0) + (booking.fine != null ? booking.fine : 0)}"
+                ></td>
+                <td th:text="${booking.status}"></td>
+                <td>
+                  <form th:action="@{/user/make-payment}" method="post">
+                    <input
+                      type="hidden"
+                      name="bookingId"
+                      th:value="${booking.id}"
+                    />
+
+                    <label for="method">Method:</label>
+                    <select name="paymentMethod" required>
+                      <option value="UPI">UPI</option>
+                      <option value="Card">Card</option>
+                      <option value="Cash">Cash</option>
+                    </select>
+
+                    <button
+                      type="submit"
+                      class="btn"
+                      th:disabled="${booking.status == 'Paid'}"
+                    >
+                      Pay Now
+                    </button>
+                  </form>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </main>
+
+    <div th:replace="~{fragments/footer :: footer}"></div>
+  </body>
+</html>

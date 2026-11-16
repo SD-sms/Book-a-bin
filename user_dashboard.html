@@ -1,0 +1,248 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>User Dashboard | Book-A-Bin</title>
+  <!-- Bootstrap 5 CSS -->
+  <link
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+    rel="stylesheet"
+    integrity="sha384-9ndCyUa6mY2k6Y4f2b6j2q6Qb6Y5Y6q3Q5Y7g5q3Q5Y6g5Q3Y6g5Q3Y6g5Q3Y6g5"
+    crossorigin="anonymous"
+  />
+  <link rel="stylesheet" href="/css/style.css" />
+</head>
+<body>
+
+    <div>
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="/">Book-A-Bin</a>
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#navbarSupportedContent"
+        aria-controls="#navbarSupportedContent"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link" href="/">Home</a>
+          </li>
+          <li class="nav-item dropdown">
+            <a
+              class="nav-link dropdown-toggle"
+              href="#"
+              id="instructionsDropdown"
+              role="button"
+              data-bs-toggle="dropdown"
+              aria-expanded="false"
+            >
+              Instructions
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="instructionsDropdown">
+              <li>
+                <a class="dropdown-item" href="/instructions/user"
+                  >User</a
+                >
+              </li>
+              <li>
+                <a class="dropdown-item" href="/instructions/collector"
+                  >Collector</a
+                >
+              </li>
+              <li>
+                <a class="dropdown-item" href="/instructions/bbmp"
+                  >BBMP</a
+                >
+              </li>
+              <li>
+                <a class="dropdown-item" href="/instructions/admin"
+                  >Admin</a
+                >
+              </li>
+            </ul>
+          </li>
+        </ul>
+
+        <ul class="navbar-nav mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link" href="/login">Login</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/register">Register</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+</div>
+
+    <main class="container py-4">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+            <h1 class="m-0">Welcome, <span>User</span>!</h1>
+            <a class="btn btn-sm btn-outline-secondary" href="/forgot-password?role=user">Change Password</a>
+        </div>
+        <p class="text-muted">Manage your bookings, payments, and profile.</p>
+
+        <section class="row row-cols-1 row-cols-md-3 g-3 mb-4">
+            <div class="col">
+                <div class="card h-100 p-3">
+                    <h5>Past Bookings</h5>
+                    <p class="mb-2">See your booking history, segregation status, and fines if any.</p>
+                    <a class="btn btn-sm btn-primary" href="/user/bookings">View Bookings</a>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card h-100 p-3">
+                    <h5>Book a Bin</h5>
+                    <p class="mb-2">Schedule a new garbage collection at your location.</p>
+                    <a class="btn btn-sm btn-primary" href="/user/book-bin">New Booking</a>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card h-100 p-3">
+                    <h5>Payment Receipts</h5>
+                    <p class="mb-2">View and download past payment receipts.</p>
+                    <a class="btn btn-sm btn-primary" href="/user/payments">View Payments</a>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card h-100 p-3">
+                    <h5>Make a Payment</h5>
+                    <p class="mb-2">Pay BBMP fees or fines for garbage collection services.</p>
+                    <a class="btn btn-sm btn-primary" href="/user/make-payment">Make Payment</a>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="card h-100 p-3">
+                    <h5>Edit Profile</h5>
+                    <p class="mb-2">Update your profile, password, and address anytime.</p>
+                        <a class="btn btn-sm btn-primary" href="/user/edit-profile">Edit Profile</a>
+                        <a class="btn btn-sm btn-outline-secondary ms-2" href="/forgot-password?role=user">Change Password</a>
+                        <a class="btn btn-sm btn-outline-info ms-2" href="/user/schedules">View Regular Schedule</a>
+                </div>
+            </div>
+        </section>
+
+        <section class="history">
+            <h2>Your Booking History</h2>
+            <div class="table-responsive">
+                <table class="table table-sm table-hover">
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>Date</th>
+                <th>Location</th>
+                <th>Status</th>
+                <th>Segregated</th>
+                <th>Amount</th>
+                <th>Fine</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>3</td>
+                <td>02-11-2025 17:49</td>
+                <td>Test Location</td>
+                <td>Confirmed</td>
+                <td>No</td>
+                <td>50.0</td>
+                <td>200.0</td>
+            </tr>
+            <tr>
+                <td>4</td>
+                <td>02-11-2025 17:51</td>
+                <td>Test Location</td>
+                <td>Confirmed</td>
+                <td>No</td>
+                <td>50.0</td>
+                <td>200.0</td>
+            </tr>
+            <tr>
+                <td>5</td>
+                <td>02-11-2025 18:04</td>
+                <td>Test Location</td>
+                <td>Confirmed</td>
+                <td>No</td>
+                <td>50.0</td>
+                <td>200.0</td>
+            </tr>
+            <tr>
+                <td>6</td>
+                <td>02-11-2025 18:51</td>
+                <td>Test Location</td>
+                <td>Confirmed</td>
+                <td>No</td>
+                <td>50.0</td>
+                <td>200.0</td>
+            </tr>
+            <tr>
+                <td>7</td>
+                <td>02-11-2025 18:52</td>
+                <td>Test Location</td>
+                <td>Confirmed</td>
+                <td>No</td>
+                <td>50.0</td>
+                <td>200.0</td>
+            </tr>
+            <tr>
+                <td>8</td>
+                <td>02-11-2025 18:52</td>
+                <td>Test Location</td>
+                <td>Confirmed</td>
+                <td>No</td>
+                <td>50.0</td>
+                <td>200.0</td>
+            </tr>
+            <tr>
+                <td>9</td>
+                <td>02-11-2025 18:54</td>
+                <td>Test Location</td>
+                <td>Confirmed</td>
+                <td>No</td>
+                <td>50.0</td>
+                <td>200.0</td>
+            </tr>
+            </tbody>
+        </table>
+    </section>
+</main>
+
+<!-- Footer -->
+<div>
+  <footer class="app-footer" role="contentinfo">
+    <div class="footer-inner">
+      <div class="footer-left">
+        <small>&copy; 2025 Book-A-Bin</small>
+      </div>
+      <div class="footer-right">
+        <small>
+          <a href="/privacy">Privacy Policy</a> |
+          <a href="/terms">Terms of Service</a>
+        </small>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Bootstrap Bundle JS (includes Popper) -->
+  <script
+    src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-ABC"
+    crossorigin="anonymous"
+  ></script>
+</div>
+
+</body>
+</html>
+

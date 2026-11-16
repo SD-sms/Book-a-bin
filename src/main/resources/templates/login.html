@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head th:replace="~{fragments/head :: head('Login | Book-A-Bin')}"></head>
+  <body>
+    <!-- No navbar on login page to keep it focused -->
+    <main class="container py-5">
+      <div class="card-panel max-md">
+        <h1>Book-A-Bin Login</h1>
+        <form id="loginForm" class="login-form" autocomplete="off">
+          <label for="role">Login As:</label>
+          <select id="role" name="role" required>
+            <option value="">-- Select Role --</option>
+            <option value="user">User</option>
+            <option value="collector">Garbage Collector</option>
+            <option value="bbmp">BBMP Official</option>
+            <option value="admin">Admin</option>
+          </select>
+
+          <div id="usernameField">
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username" />
+          </div>
+
+          <div id="idField" class="hidden">
+            <label for="id">ID:</label>
+            <input type="text" id="id" name="id" />
+          </div>
+
+          <label for="password">Password:</label>
+          <input type="password" id="password" name="password" required />
+
+          <button type="submit" class="btn">Login</button>
+        </form>
+        <p class="mt-3">
+          Don't have an account?
+          <a id="registerLink" href="/register">Register Now</a>
+          &nbsp;|&nbsp;
+          <a id="forgotLink" href="/forgot-password">Forgot Password?</a>
+        </p>
+      </div>
+    </main>
+    <div th:replace="~{fragments/footer :: footer}"></div>
+
+    <script>
+      const roleSelect = document.getElementById('role');
+      roleSelect.addEventListener('change', function () {
+        const r = this.value;
+        const uname = document.getElementById('usernameField');
+        const idf = document.getElementById('idField');
+        if (uname)
+          uname.classList.toggle(
+            'hidden',
+            !(r === 'user' || r === 'collector')
+          );
+        if (idf)
+          idf.classList.toggle('hidden', !(r === 'bbmp' || r === 'admin'));
+        // update the Register and Forgot links to include the selected role
+        const reg = document.getElementById('registerLink');
+        const forgot = document.getElementById('forgotLink');
+        if (reg)
+          reg.href = '/register' + (r ? '?role=' + encodeURIComponent(r) : '');
+        if (forgot)
+          forgot.href =
+            '/forgot-password' + (r ? '?role=' + encodeURIComponent(r) : '');
+      });
+
+      // Preselect role from query string if present and update register link
+      (function preselectFromQuery() {
+        const params = new URLSearchParams(window.location.search);
+        const qrole = params.get('role');
+        const reg = document.getElementById('registerLink');
+        if (qrole) {
+          // set the select value if it exists
+          const opt = Array.from(roleSelect.options).find(
+            (o) => o.value === qrole
+          );
+          if (opt) {
+            roleSelect.value = qrole;
+            roleSelect.dispatchEvent(new Event('change'));
+          }
+          if (reg) reg.href = '/register?role=' + encodeURIComponent(qrole);
+          const forgot = document.getElementById('forgotLink');
+          if (forgot)
+            forgot.href = '/forgot-password?role=' + encodeURIComponent(qrole);
+        } else if (reg) {
+          // ensure default register link (no role)
+          reg.href = '/register';
+          const forgot = document.getElementById('forgotLink');
+          if (forgot) forgot.href = '/forgot-password';
+        }
+      })();
+
+      document
+        .getElementById('loginForm')
+        .addEventListener('submit', async function (e) {
+          e.preventDefault();
+          const role = document.getElementById('role').value;
+          const payload = {
+            role,
+            password: document.getElementById('password').value,
+          };
+          if (role === 'user' || role === 'collector')
+            payload.username = document.getElementById('username').value;
+          if (role === 'bbmp' || role === 'admin')
+            payload.id = document.getElementById('id').value;
+
+          try {
+            const res = await fetch('/api/login', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify(payload),
+            });
+            if (!res.ok) {
+              if (res.status === 401) {
+                alert('Invalid credentials');
+                return;
+              }
+              alert('Server error: ' + res.status);
+              return;
+            }
+            const data = await res.json();
+            if (data.status === 'success') {
+              let roleVal = (data.role || role).toString();
+              roleVal = roleVal.replace(/^ROLE_/, '').toLowerCase();
+              // normalize bbmp collector to 'bbmp'
+              if (roleVal.includes('bbmp')) roleVal = 'bbmp';
+              window.location.href = '/' + roleVal + '/dashboard';
+            } else {
+              alert('Invalid Login');
+            }
+          } catch (err) {
+            console.error(err);
+            alert('Network or server error');
+          }
+        });
+    </script>
+  </body>
+</html>

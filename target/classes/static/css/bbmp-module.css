@@ -1,0 +1,6 @@
+@import url('/css/global.css');
+
+/* BBMP module tweaks */
+.bbmp-dashboard .dashboard-card { min-height:120px; }
+.bbmp-actions { display:flex; gap:10px; flex-wrap:wrap; }
+

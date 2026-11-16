@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head th:replace="~{fragments/head :: head('Edit Profile')}"></head>
+  <body>
+    <div th:replace="~{fragments/header :: header}"></div>
+
+    <main class="container py-4">
+      <div class="mx-auto max-w-720">
+        <h1 class="mb-3">Edit Profile</h1>
+
+        <div class="card p-3">
+          <div class="mb-2 text-end">
+            <a th:href="@{/user/dashboard}" class="btn btn-ghost"
+              >← Back to Dashboard</a
+            >
+          </div>
+          <form th:action="@{/user/update-profile}" method="post">
+            <div class="mb-3">
+              <label for="username" class="form-label">Username</label>
+              <input
+                type="text"
+                id="username"
+                name="username"
+                th:value="${user.username}"
+                readonly
+                class="form-control"
+              />
+            </div>
+
+            <div class="mb-3">
+              <label for="fullName" class="form-label">Full Name</label>
+              <input
+                type="text"
+                id="name"
+                name="name"
+                th:value="${user.name}"
+                required
+                class="form-control"
+              />
+            </div>
+
+            <div class="mb-3">
+              <label for="email" class="form-label">Email</label>
+              <input
+                type="email"
+                id="email"
+                name="email"
+                th:value="${user.email}"
+                required
+                class="form-control"
+              />
+            </div>
+
+            <div class="mb-3">
+              <label for="phone" class="form-label">Phone Number</label>
+              <input
+                type="text"
+                id="phone"
+                name="phone"
+                th:value="${user.phone}"
+                required
+                class="form-control"
+              />
+            </div>
+
+            <div class="mb-3">
+              <label for="address" class="form-label">Address</label>
+              <textarea
+                id="address"
+                name="address"
+                rows="3"
+                required
+                class="form-control"
+                th:text="${user.address}"
+              ></textarea>
+            </div>
+
+            <div class="mb-3">
+              <label for="details" class="form-label">Extra Details</label>
+              <input
+                type="text"
+                id="details"
+                name="details"
+                th:value="${user.details}"
+                class="form-control"
+              />
+            </div>
+
+            <div class="mb-3">
+              <label for="password" class="form-label"
+                >New Password (leave blank to keep current)</label
+              >
+              <input
+                type="password"
+                id="password"
+                name="password"
+                class="form-control"
+              />
+            </div>
+
+            <div class="mb-3">
+              <label for="confirmPassword" class="form-label"
+                >Confirm New Password</label
+              >
+              <input
+                type="password"
+                id="confirmPassword"
+                name="confirmPassword"
+                class="form-control"
+              />
+            </div>
+
+            <button type="submit" class="btn btn-primary">Save Changes</button>
+          </form>
+        </div>
+      </div>
+    </main>
+
+    <div th:replace="~{fragments/footer :: footer}"></div>
+  </body>
+</html>
